@@ -1,0 +1,479 @@
+#include <iostream>
+#include<Windows.h> //콘솔창 이용, system,Sleep..등등
+#include<conio.h> //콘솔 입출력 함수 제공(kbhit, getch,...)
+#include<cstdlib> // rand(),srand()
+#include<string> //문자열 정리
+#include<vector> //vector 선언
+#include <regex>//자리 바꾸는 함수 선언
+#include<fstream>//파일을 입출력
+#define UP 72  // ↑
+#define DOWN 80 // ↓
+#define LEFT 75 // ←
+#define RIGHT 77 // →
+#define SPACE 32 //스페이스바
+#define LIFE 3 //목숨
+
+using namespace std;
+
+//캐릭터
+class  fruit {
+public: //외부에서 접근 가능
+
+    //과일 문자열
+    string str1 = ("    ******&&&******");
+    string str2 = ("   **@@@@@@@@@@@@@**");
+    string str3 = ("  *&&&&&&&&&&&&&&&&&*");
+    string str4 = (" *@@@@@@@@@@@@@@@@@@@*");
+    string str5 = ("*&&&&&&&&&&&&&&&&&&&&&*");
+    string str6 = ("*@@@@@@@@@@@@@@@@@@@@@*");
+    string str7 = (" *&&&&&&&&&&&&&&&&&&&*");
+    string str8 = ("  *@@@@@@@@@@@@@@@@@*");
+    string str9 = ("   **&&&&&&&&&&&&&**");
+
+    //다람쥐 문자열
+    string ani1 = ("                     ****      ****");
+    string ani2 = ("                  **    ******    **");
+    string ani3 = ("                      **     ?  ?     **");
+    string ani4 = ("                 **   [%]  [%]   **");
+    string ani5 = ("                **      ^^      **");
+    string ani6 = ("                 **************    @@@@@@");
+    string ani7 = ("                    ##  ##        @     @");
+    string ani8 = ("               %%---##  ##---%%  @ @@@  @");
+    string ani9 = ("               %!   ##  ##   !%  @ @  @ @");
+    string ani10 = ("                %!************!%  @ @ @ @");
+    string ani11 = ("                  ***$$$$$$$$***@@@@@@");
+    string ani12 = ("                   **************");
+    string ani13 = ("                        %%  %%");
+    string ani14 = ("                                          $$$ $$$");
+
+    void apple() {
+        cout << "          _______" << ani1 << endl;
+        cout << "         I^ ^____I" << ani2 << endl;
+        cout << "         I 0 I" << ani3 << endl;
+        cout << str1 << ani4 << endl;
+        cout << str2 << ani5 << endl;
+        cout << str3 << ani6 << endl;
+        cout << str4 << ani7 << endl;
+        cout << str5 << ani8 << endl;
+        cout << str6 << ani9 << endl;
+        cout << str7 << ani10 << endl;
+        cout << str8 << ani11 << endl;
+        cout << str9 << ani12 << endl;
+        cout << "    ***************" << ani13 << endl;
+        cout << ani14 << endl;
+    }
+
+    void apple2() {// 문자열 치환 &,@,%를 빈칸으로 치환
+        str1 = regex_replace(str1, regex("&"), " ");
+        str3 = regex_replace(str3, regex("&"), " ");
+        str5 = regex_replace(str5, regex("&"), " ");
+        str7 = regex_replace(str7, regex("&"), " ");
+        str9 = regex_replace(str9, regex("&"), " ");
+        str2 = regex_replace(str2, regex("@"), " ");
+        str4 = regex_replace(str4, regex("@"), " ");
+        str6 = regex_replace(str6, regex("@"), " ");
+        str8 = regex_replace(str8, regex("@"), " ");
+        ani4 = regex_replace(ani4, regex("%"), "^");
+        ani6 = regex_replace(ani6, regex("@"), " ");
+        ani7 = regex_replace(ani7, regex("@"), " ");
+        ani8 = regex_replace(ani8, regex("@"), " ");
+        ani9 = regex_replace(ani9, regex("@"), " ");
+        ani10 = regex_replace(ani10, regex("@"), " ");
+        ani11 = regex_replace(ani11, regex("@"), " ");
+        ani9 = regex_replace(ani9, regex("%"), " ");
+        ani10 = regex_replace(ani10, regex("%"), " ");
+
+
+        cout << "          _______" << ani1 << endl;
+        cout << "         I0 0 ___I" << ani2 << endl;
+        cout << "         I 0 I" << ani3 << endl;
+        cout << str1 << ani4 << endl;
+        cout << str2 << ani5 << endl;
+        cout << str3 << ani6 << endl;
+        cout << str4 << ani7 << endl;
+        cout << str5 << "        ( )%%%%%%---##  ##---%%%%%%%( )        " << endl;
+        cout << str6 << ani9 << endl;
+        cout << str7 << ani10 << endl;
+        cout << str8 << ani11 << endl;
+        cout << str9 << ani12 << endl;
+        cout << "    ***************" << "                        %%  %%" << endl;
+        cout << "                                          %%    %%" << endl;
+        cout << "                                        $$$      $$$" << endl;
+    }
+    void apple3() {// 문자열 치환 @,%를 빈칸,!로 치환
+        ani4 = regex_replace(ani4, regex("%"), "!");
+        ani6 = regex_replace(ani6, regex("@"), " ");
+        ani7 = regex_replace(ani7, regex("@"), " ");
+        ani8 = regex_replace(ani8, regex("@"), " ");
+        ani9 = regex_replace(ani9, regex("@"), " ");
+        ani10 = regex_replace(ani10, regex("@"), " ");
+        ani11 = regex_replace(ani11, regex("@"), " ");
+
+        cout << "          _______" << ani1 << endl;
+        cout << "         I^ ^____I" << ani2 << endl;
+        cout << "         I 0 I" << "                      **     !  !     **" << endl;
+        cout << str1 << ani4 << endl;
+        cout << str2 << "                **     (  )     **" << endl;
+        cout << str3 << ani6 << endl;
+        cout << str4 << ani7 << endl;
+        cout << str5 << ani8 << endl;
+        cout << str6 << "             %  !   ##  ##   !  %                " << endl;
+        cout << str7 << ani10 << endl;
+        cout << str8 << "                ()***$$$$$$$$***()               " << endl;
+        cout << str9 << ani12 << endl;
+        cout << "    ***************" << ani13 << endl;
+        cout << ani14 << endl;
+    }
+};
+//좌표설정
+void gotoxy(int x, int y) {
+    HANDLE consoleHandle = GetStdHandle(STD_OUTPUT_HANDLE); //콘솔의 ID
+    COORD pos; //x,y를 가지고 있는 구조체
+    pos.X = x;//x좌표
+    pos.Y = y;//y좌표
+    SetConsoleCursorPosition(consoleHandle, pos); //콘솔의 핸들값(콘솔이 가지는 ID)과 좌표값을 받아 해당 위치로 콘솔의 커서 이동
+}
+//시작화면 1
+void title() {
+    cout << endl;
+    cout << "◆====================================================================◆" << endl << endl << endl;
+    cout << "                   #####  ####   #   #  #####  #####" << endl;
+    cout << "                   #      #   #  #   #    #      #" << endl;
+    cout << "                   #####  # #    #   #    #      #" << endl;
+    cout << "                   #      #  #   #   #    #      #" << endl;
+    cout << "                   #      #   #   ###   #####    #" << endl;
+    cout << endl << endl;
+    cout << "◆====================================================================◆" << endl;
+}
+//시작화면 이동키
+int keycontrol() {
+    char temp = _getch();//엔터 키를 안 눌러도 됨, 키를 누름과 동시에 값 입력, 특수키도 가능
+    if (temp == UP) {  //위로 이동
+        return UP;
+    }
+    if (temp == DOWN) { //아래로 이동
+        return DOWN;
+    }
+    if (temp == ' ') { //선택
+        return SPACE;
+    }
+}
+//시작화면 2(메뉴선택)
+int menu() {
+
+    int x = 30; int y = 14;
+
+    gotoxy(x - 2, y);//좌표 지정
+    cout << "> 1. 게 임 시 작 " << endl;
+    gotoxy(x, y + 1);
+    cout << "2. 게 임 방 법" << endl;
+    gotoxy(x, y + 2);
+    cout << "3. 기 록 보 기" << endl;
+    gotoxy(x, y + 3);
+    cout << "4. 종 료 하 기" << endl;
+    gotoxy(10, 19);
+    cout << "뱡향키로 이동해 스페이스바를 누를 시 메뉴가 선택됩니다.";
+
+    while (1) {
+        int num = keycontrol();// ">"이동
+        switch (num) {
+        case UP://위로 이동
+            if (y > 14) {
+                gotoxy(x - 2, y);
+                cout << " ";
+                gotoxy(x - 2, --y);
+                cout << ">";
+            }
+            break;
+        case DOWN://아래로 이동
+            if (y < 17) {
+                gotoxy(x - 2, y);
+                cout << " ";
+                gotoxy(x - 2, ++y);
+                cout << ">";
+            }
+            break;
+        case SPACE: //선택
+            return y - 14;
+        }
+
+    }
+
+}
+//게임방법
+void Help() {
+    system("cls"); //화면 모두 지우기
+    cout << endl << endl << endl;
+    cout << "       [게 임 하 는 법]" << endl << endl;
+    cout << "     이 게임은 나오는 화살표를 따라 치며" << endl << endl;
+    cout << "     과일을 깎는 게임이다. 화살표가 랜덤" << endl << endl;
+    cout << "     으로 나오는데 그 화살표들을 순서대로" << endl << endl;
+    cout << "     따라 치면 과일 한 개가 깎아진다. " << endl << endl;
+    cout << "     화살표를 한 개라도 잘못 치면 바로 " << endl << endl;
+    cout << "     다른 화살표로 교체된다. 목숨은 단" << endl << endl;
+    cout << "     3개로, 과일 하나당 30점이다. 게임을 " << endl << endl;
+    cout << "     시작할 때 적은 닉네임과 함께 점수가 랭킹에 기록된다." << endl << endl << endl << endl;
+    cout << "   스페이스바를 누르면 메인화면으로 돌아갑니다." << endl;
+
+    while (1) {
+        if (keycontrol() == SPACE) { //메뉴로 이동
+            break;
+        }
+    }
+
+}
+//게임시작화면
+void start(const int life, const int score, const string qstr, const string astr) { //const:데이터 초기화가 이뤄지면 그 값을 바꿀 수 없도록 해주는 것, 값이 변경되는 걸 방지
+    fruit myfruit; //클래스 불러오기
+    system("cls"); //화면 모두 지우기
+    cout << "◆====================================================================◆" << endl << endl << endl;
+    gotoxy(3, 3);
+    cout << "life : " << life << "/" << LIFE; //목숨
+    gotoxy(3, 4);
+    cout << "SCORE : " << score; //점수
+    gotoxy(0, 8);
+    myfruit.apple();//fruit에서 apple()불러오기
+    gotoxy(4, 5);
+    cout << "=================";
+    gotoxy(4, 7);
+    cout << "=================";
+    gotoxy(4, 6);
+    cout << "!'나는 과일이야'!";
+    gotoxy(34, 5);
+    cout << "======================";
+    gotoxy(34, 7);
+    cout << "======================";
+    gotoxy(34, 6);
+    cout << "!'안녕,나는 다람쥐야'!";
+    gotoxy(12, 26);
+    cout << "문제 : " << qstr; //문제 불러오기
+    gotoxy(12, 28);
+    cout << "정답 : " << astr; //정답 입력하기
+
+    gotoxy(1, 31);
+    cout << "◆====================================================================◆" << endl;
+}
+//화살표랜덤
+void keyrandom(vector<int>& qv, int number) {
+    //int형 벡터 qv
+    number = 7;//화살표 갯수
+
+    int num = 0; //초기 값 지정
+    srand((unsigned)time(NULL));//랜덤으로 변수 설정 (중복X)
+    for (int i = 0; i < number; ++i) { //초기식,조건식,증감식
+        num = rand() % 4; //화살표 종류
+        switch (num) {
+        case 0://윗방향
+            qv.push_back(UP);
+            break;
+        case 1://오른쪽방향
+            qv.push_back(RIGHT);
+            break;
+        case 2://왼쪽방향
+            qv.push_back(LEFT);
+            break;
+        case 3://아랫방향
+            qv.push_back(DOWN);
+            break;
+        }
+    }
+}
+//화살표 입력
+void keyoutput(const vector<int> V, string& s) {
+
+    for (int i = 0; i < static_cast<int>(V.size()); ++i) {
+        //static_case : 형 변환. V.size()를 int로
+        switch (V[i]) {
+        case UP://윗방향
+            s += "↑ ";
+            break;
+        case DOWN://아랫방향
+            s += "↓ ";
+            break;
+        case LEFT://왼쪽방향
+            s += "← ";
+            break;
+        case RIGHT://오른쪽방향
+            s += "→ ";
+            break;
+        }
+    }
+    SPACE;// 정답 입력
+
+}
+//입력이 맞는지 체크
+bool check(const vector<int> qv, const vector<int> av) {
+    if (qv.size() != av.size()) {//입력이랑 출력의 입력 개수 확인
+        return false;
+    }
+    for (int i = 0; i < static_cast<int>(qv.size()); ++i) {
+        if (qv[i] != av[i]) //입력과 출력이 동일한지 확인
+        {
+            return false;
+        }
+    }
+    return true;
+}
+//게임시작
+void gamestart() {
+    fruit myfruit;//fruit클래스 불러오기
+    int life = LIFE;//목숨 초기값
+    int score = 0;//점수 초기값
+    //문제
+    vector<int> qv; //정답 벡터 생성
+    string qstr = "";//정답 출력
+    //답안지
+    vector<int> av; //문제 벡터생성
+    string astr = "";//문제 출력
+
+    int input1 = 0, input2 = 0; //초기값 설정
+    while (true) {
+        int number = 7; // 화살표 개수
+        keyrandom(qv, number);
+        keyoutput(qv, qstr);
+        while (true) {
+            start(life, score, qstr, astr);
+
+            if (life == 0)//목숨이 0일시 게임종료
+            {
+                system("cls");
+                cout << "◆====================================================================◆" << endl << endl << endl;
+                gotoxy(0, 9);
+                cout << "        ####    #     ## ##  #####    ###   #   #  #####  #### " << endl;
+                cout << "       #       # #    # # #  #       #   #  #   #  #      #   #   " << endl;
+                cout << "       #  ##  #####   #   #  ######  #   #  #   #  #####  #### " << endl;
+                cout << "       #   #  #   #   #   #  #       #   #   # #   #      #  # " << endl;
+                cout << "        ####  #   #   #   #  #####    ###     #    #####  #   #" << endl << endl;
+                cout << endl << endl;
+                cout << "      (이름입력후에 엔터를 누르고 스페이스바를 누르세요)" << endl << endl;
+                cout << endl << endl;
+                cout << "                         SCORE : " << score;
+                cout << endl << endl;
+                cout << "◆====================================================================◆" << endl << endl << endl;
+                string line;
+                ofstream file("rank.txt", ios::app); //파일 열기. 없으면 만들어짐. ios::app => 이어쓰기
+                gotoxy(20, 15);
+                cout << "이름을 입력하세요 : ";
+                char name[50];
+                cin.getline(name, 50);
+                if (file.is_open()) {
+                    file << "이름 : " << name << "   , ";
+                    file << "score : " << score << endl;
+                    file.close();
+                }
+
+                while (1) {
+                    if (keycontrol() == SPACE) {//스페이스 입력시 메뉴로 이동
+                        break;
+                    }
+                }
+
+                return;
+
+            }
+
+            input1 = _getch();//_getch는 아스키코드를 정수형으로 출력해줌
+            if (input1 == 224) {//224 방향키의 아스키코드
+                input2 = _getch();
+                av.push_back(input2);//push back은 새로운 요소 추가를 위해 씀
+                switch (input2) {
+                case UP:
+                    astr += "↑ ";
+                    break;
+                case DOWN:
+                    astr += "↓ ";
+                    break;
+                case LEFT:
+                    astr += "← ";
+                    break;
+                case RIGHT:
+                    astr += "→ ";
+                    break;
+                }
+            }
+            //정답
+            else if (input1 == SPACE) {//스페이스바로 정답입력시
+                if (check(qv, av)) {
+                    score += 30;//30점 추가
+
+                    gotoxy(0, 8);
+                    myfruit.apple2();//apple2() 불러오기
+                    gotoxy(4, 6);
+                    cout << "!' 까악>0< '!";
+                    gotoxy(34, 6);
+                    cout << "!'와우,과일 맛있겠다'!";
+
+                    Sleep(1000);//1초 동안 보여주기
+
+                }
+                //오답
+                else {
+
+                    gotoxy(0, 8);
+                    myfruit.apple3();//apple3() 불러오기
+                    gotoxy(34, 6);
+                    cout << "!'이런,실패다 ㅠ0ㅠ'!";
+                    --life;//목숨 1 감소
+
+                    Sleep(1000);//1초 동안 보여주기
+
+                }
+                qv.clear();//문제 초기화
+                qstr = "";
+                av.clear();//정답 초기화
+                astr = "";
+                break;
+            }
+
+
+        }
+    }
+}
+
+//랭크
+void Ranking() {
+    system("cls");
+    string line;
+    ifstream file("rank.txt");
+    if (file.is_open()) {
+        cout << "메뉴 이동은 스페이스바를 눌러주세요" << endl << endl;
+        while (getline(file, line)) {
+
+            cout << line << endl;
+        }
+        file.close();
+
+    }
+    else {
+        cout << "파일을 열 수 없습니다.";
+    }
+
+
+    while (1) {
+        if (keycontrol() == SPACE) {
+            break;
+        }
+    }
+
+}
+
+int main(void) {
+    while (true) {
+        title();
+        int Menu = menu();
+        if (Menu == 0) {//게임시작
+            gamestart();
+        }
+        if (Menu == 1) {//게임방법
+            Help();
+        }
+        if (Menu == 2) {//기록확인
+            Ranking();
+        }
+        if (Menu == 3) {//게임종료
+            return 0;
+        }
+        system("cls");//모두 지우기
+    }
+    return 0;
+}
